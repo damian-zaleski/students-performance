@@ -1,21 +1,20 @@
 package pl.degath.sorter;
 
-import java.util.Comparator;
+
+import pl.degath.sorter.port.StudentSorterApi;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ApplicationService {
 
-    List<Student> sortStudentsByPerformance(List<Student> students) {
-        if (students == null || students.isEmpty()) {
-            return List.of();
-        }
-        if (students.size() == 1) {
-            return students;
-        }
+    private final StudentSorterApi studentSorterApi;
 
-        return students.stream()
-                .sorted(Comparator.comparing(Student::performance))
-                .collect(Collectors.toList());
+    public ApplicationService(StudentSorterApi studentSorterApi) {
+        this.studentSorterApi = studentSorterApi;
+    }
+
+    List<Student> sortStudentsByPerformance(List<Student> students) {
+
+        return studentSorterApi.sortByPerformance(students);
     }
 }
