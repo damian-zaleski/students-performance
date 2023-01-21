@@ -1,7 +1,8 @@
 package pl.degath.adapters;
 
+import jakarta.inject.Singleton;
 import pl.degath.sorter.Student;
-import pl.degath.sorter.port.StudentSorterApi;
+import pl.degath.sorter.port.StudentSorter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,13 @@ import java.util.List;
 /**
  * generated via chat openai
  */
-public class MergeStudentSorterService implements StudentSorterApi {
+@Singleton
+public class MergeStudentSorter implements StudentSorter {
+    @Override
+    public String algorithmName() {
+        return "merge";
+    }
+
     @Override
     public List<Student> sortByPerformance(List<Student> students) {
         if (students == null || students.isEmpty()) {

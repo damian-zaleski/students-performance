@@ -1,14 +1,21 @@
 package pl.degath.adapters;
 
+import jakarta.inject.Singleton;
 import pl.degath.sorter.Student;
-import pl.degath.sorter.port.StudentSorterApi;
+import pl.degath.sorter.port.StudentSorter;
 
 import java.util.List;
 
 /**
  * generated via chat openai
  */
-public class HeapStudentSorterService implements StudentSorterApi {
+@Singleton
+public class HeapStudentSorter implements StudentSorter {
+    @Override
+    public String algorithmName() {
+        return "heap";
+    }
+
     @Override
     public List<Student> sortByPerformance(List<Student> students) {
         if (students == null || students.isEmpty()) {

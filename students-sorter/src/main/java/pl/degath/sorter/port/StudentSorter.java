@@ -4,7 +4,9 @@ import pl.degath.sorter.Student;
 
 import java.util.List;
 
-public interface StudentSorterApi {
+public interface StudentSorter {
+
+    String algorithmName();
 
     List<Student> sortByPerformance(List<Student> students);
 }

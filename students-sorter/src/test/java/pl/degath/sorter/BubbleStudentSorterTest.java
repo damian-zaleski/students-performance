@@ -2,23 +2,21 @@ package pl.degath.sorter;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.degath.adapters.BubbleStudentSorterService;
-import pl.degath.sorter.Student;
-import pl.degath.sorter.port.StudentSorterApi;
+import pl.degath.adapters.BubbleStudentSorter;
+import pl.degath.sorter.port.StudentSorter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-class BubbleStudentSorterServiceTest {
+class BubbleStudentSorterTest {
 
-    StudentSorterApi studentSorterApi;
+    StudentSorter studentSorter;
 
     @BeforeEach
     void setUp() {
-        studentSorterApi = new BubbleStudentSorterService();
+        studentSorter = new BubbleStudentSorter();
     }
 
     @Test
@@ -28,7 +26,7 @@ class BubbleStudentSorterServiceTest {
         Student linus = new Student("Linus", 60.0);
         List<Student> students = new ArrayList<>(List.of(charlie, lucy, linus));
 
-        List<Student> sortedStudents = studentSorterApi.sortByPerformance(students);
+        List<Student> sortedStudents = studentSorter.sortByPerformance(students);
 
         assertThat(sortedStudents).containsExactly(charlie, linus, lucy);
     }
@@ -40,7 +38,7 @@ class BubbleStudentSorterServiceTest {
         Student lucy = new Student("Lucy", 80.0);
         List<Student> students = new ArrayList<>(List.of(charlie, lucy, linus));
 
-        List<Student> sortedStudents = studentSorterApi.sortByPerformance(students);
+        List<Student> sortedStudents = studentSorter.sortByPerformance(students);
 
         assertThat(sortedStudents).containsExactly(charlie, linus, lucy);
     }
@@ -50,7 +48,7 @@ class BubbleStudentSorterServiceTest {
         Student charlie = new Student("Charlie", 50.0);
         List<Student> students = new ArrayList<>(List.of(charlie));
 
-        List<Student> sortedStudents = studentSorterApi.sortByPerformance(students);
+        List<Student> sortedStudents = studentSorter.sortByPerformance(students);
 
         assertThat(sortedStudents).containsExactly(charlie);
     }
@@ -63,7 +61,7 @@ class BubbleStudentSorterServiceTest {
         Student johny = new Student("Johny", 60.0);
         List<Student> students = new ArrayList<>(List.of(charlie, lucy, linus, johny));
 
-        List<Student> sortedStudents = studentSorterApi.sortByPerformance(students);
+        List<Student> sortedStudents = studentSorter.sortByPerformance(students);
 
         assertThat(sortedStudents).first().isEqualTo(charlie);
         assertThat(sortedStudents).last().isEqualTo(lucy);
@@ -73,7 +71,7 @@ class BubbleStudentSorterServiceTest {
     public void shouldNotThrowExceptionIfStudentsAreEmpty() {
         List<Student> students = new ArrayList<>(List.of());
 
-        List<Student> sortedStudents = studentSorterApi.sortByPerformance(students);
+        List<Student> sortedStudents = studentSorter.sortByPerformance(students);
 
         assertThat(sortedStudents).isEmpty();
     }
@@ -82,7 +80,7 @@ class BubbleStudentSorterServiceTest {
     public void shouldNotThrowExceptionIfStudentsAreMissing() {
         List<Student> students = null;
 
-        List<Student> sortedStudents = studentSorterApi.sortByPerformance(students);
+        List<Student> sortedStudents = studentSorter.sortByPerformance(students);
 
         assertThat(sortedStudents).isEmpty();
     }

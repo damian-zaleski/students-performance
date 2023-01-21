@@ -1,5 +1,6 @@
 package pl.degath.adapters;
 
+import jakarta.inject.Singleton;
 import pl.degath.sorter.Student;
 import pl.degath.sorter.port.StudentSourceApi;
 
@@ -10,6 +11,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+@Singleton
 public class StudentSourceFromFileBytesService implements StudentSourceApi {
 
     private final InputStream inputStream;
