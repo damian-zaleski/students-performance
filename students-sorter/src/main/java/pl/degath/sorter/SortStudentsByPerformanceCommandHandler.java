@@ -16,11 +16,19 @@ public class SortStudentsByPerformanceCommandHandler {
         this.studentSorters = studentSorters;
     }
 
-    public List<Student> sortStudentsByPerformance(SortStudentsByPerformanceCommand command) {
+    public SortStudentsByPerformanceResult sortStudentsByPerformance(SortStudentsByPerformanceCommand command) {
         return studentSorters.stream()
                 .filter(studentSorter -> command.algorithmName().equals(studentSorter.algorithmName()))
-                .map(studentSorter -> studentSorter.sortByPerformance(command.students()))
+                .map(studentSorter -> {
+                    long startTime = System.nanoTime();
+                    var students = studentSorter.sortByPerformance(command.students());
+                    long endTime = System.nanoTime();
+                    long elapsedTimeInNs = endTime - startTime;
+
+                    return new SortStudentsByPerformanceResult(students, students.size(), elapsedTimeInNs);
+                })
                 .findFirst()
                 .orElseThrow();
     }
 }
+

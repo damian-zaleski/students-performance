@@ -6,11 +6,9 @@ import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 import pl.degath.adapters.FakeStudentSourceService;
 import pl.degath.sorter.SortStudentsByPerformanceCommandHandler;
-import pl.degath.sorter.Student;
+import pl.degath.sorter.SortStudentsByPerformanceResult;
 import pl.degath.sorter.command.SortStudentsByPerformanceCommand;
 import pl.degath.sorter.port.StudentSourceApi;
-
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -31,24 +29,32 @@ public class SortStudentsByPerformanceCommandHandlerIntegrationTest {
     @Test
     void testBubble() {
         SortStudentsByPerformanceCommand command = new SortStudentsByPerformanceCommand("bubble", studentSourceApi.findAll());
-        List<Student> result = sortStudentsByPerformanceCommandHandler.sortStudentsByPerformance(command);
 
-        assertThat(result).hasSize(3);
+        SortStudentsByPerformanceResult result = sortStudentsByPerformanceCommandHandler.sortStudentsByPerformance(command);
+
+        assertThat(result.students()).hasSize(3);
+        assertThat(result.studentsCount()).isEqualTo(3);
+        assertThat(result.elapsedTime()).isNotNull();
     }
 
     @Test
     void testHeap() {
         SortStudentsByPerformanceCommand command = new SortStudentsByPerformanceCommand("heap", studentSourceApi.findAll());
-        List<Student> result = sortStudentsByPerformanceCommandHandler.sortStudentsByPerformance(command);
 
-        assertThat(result).hasSize(3);
+        SortStudentsByPerformanceResult result = sortStudentsByPerformanceCommandHandler.sortStudentsByPerformance(command);
+
+        assertThat(result.students()).hasSize(3);
+        assertThat(result.studentsCount()).isEqualTo(3);
+        assertThat(result.elapsedTime()).isNotNull();
     }
 
     @Test
     void testMerge() {
         SortStudentsByPerformanceCommand command = new SortStudentsByPerformanceCommand("merge", studentSourceApi.findAll());
-        List<Student> result = sortStudentsByPerformanceCommandHandler.sortStudentsByPerformance(command);
+        SortStudentsByPerformanceResult result = sortStudentsByPerformanceCommandHandler.sortStudentsByPerformance(command);
 
-        assertThat(result).hasSize(3);
+        assertThat(result.students()).hasSize(3);
+        assertThat(result.studentsCount()).isEqualTo(3);
+        assertThat(result.elapsedTime()).isNotNull();
     }
 }

@@ -10,6 +10,7 @@ import io.micronaut.http.annotation.Produces;
 import io.micronaut.http.multipart.CompletedFileUpload;
 import pl.degath.adapters.StudentSourceFromFileBytesService;
 import pl.degath.sorter.SortStudentsByPerformanceCommandHandler;
+import pl.degath.sorter.SortStudentsByPerformanceResult;
 import pl.degath.sorter.Student;
 import pl.degath.sorter.command.SortStudentsByPerformanceCommand;
 
@@ -32,8 +33,8 @@ public class StudentPerformanceController {
         List<Student> students = new StudentSourceFromFileBytesService(file.getInputStream()).findAll();
 
         SortStudentsByPerformanceCommand command = new SortStudentsByPerformanceCommand(algorithm, students);
-        List<Student> result = commandHandler.sortStudentsByPerformance(command);
+        SortStudentsByPerformanceResult result = commandHandler.sortStudentsByPerformance(command);
 
-        return HttpResponse.ok(new SortResponse(result, result.size()));
+        return HttpResponse.ok(SortResponse.from(result));
     }
 }
