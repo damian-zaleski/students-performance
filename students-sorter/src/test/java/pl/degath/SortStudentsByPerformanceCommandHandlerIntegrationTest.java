@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-
+//todo replace with parametrized test
 @MicronautTest
 public class SortStudentsByPerformanceCommandHandlerIntegrationTest {
     @Inject
@@ -29,8 +29,24 @@ public class SortStudentsByPerformanceCommandHandlerIntegrationTest {
     }
 
     @Test
-    void testItWorks() {
-        SortStudentsByPerformanceCommand command = new SortStudentsByPerformanceCommand("bubble");
+    void testBubble() {
+        SortStudentsByPerformanceCommand command = new SortStudentsByPerformanceCommand("bubble", studentSourceApi.findAll());
+        List<Student> result = sortStudentsByPerformanceCommandHandler.sortStudentsByPerformance(command);
+
+        assertThat(result).hasSize(3);
+    }
+
+    @Test
+    void testHeap() {
+        SortStudentsByPerformanceCommand command = new SortStudentsByPerformanceCommand("heap", studentSourceApi.findAll());
+        List<Student> result = sortStudentsByPerformanceCommandHandler.sortStudentsByPerformance(command);
+
+        assertThat(result).hasSize(3);
+    }
+
+    @Test
+    void testMerge() {
+        SortStudentsByPerformanceCommand command = new SortStudentsByPerformanceCommand("merge", studentSourceApi.findAll());
         List<Student> result = sortStudentsByPerformanceCommandHandler.sortStudentsByPerformance(command);
 
         assertThat(result).hasSize(3);

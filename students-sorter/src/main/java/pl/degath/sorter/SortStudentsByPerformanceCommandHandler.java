@@ -4,7 +4,6 @@ package pl.degath.sorter;
 import jakarta.inject.Singleton;
 import pl.degath.sorter.command.SortStudentsByPerformanceCommand;
 import pl.degath.sorter.port.StudentSorter;
-import pl.degath.sorter.port.StudentSourceApi;
 
 import java.util.List;
 
@@ -12,18 +11,15 @@ import java.util.List;
 public class SortStudentsByPerformanceCommandHandler {
 
     private final List<StudentSorter> studentSorters;
-    private final StudentSourceApi studentSourceApi;
 
-    public SortStudentsByPerformanceCommandHandler(List<StudentSorter> studentSorters, StudentSourceApi studentSourceApi) {
+    public SortStudentsByPerformanceCommandHandler(List<StudentSorter> studentSorters) {
         this.studentSorters = studentSorters;
-        this.studentSourceApi = studentSourceApi;
     }
 
     public List<Student> sortStudentsByPerformance(SortStudentsByPerformanceCommand command) {
-        List<Student> students = studentSourceApi.findAll();
         return studentSorters.stream()
                 .filter(studentSorter -> command.algorithmName().equals(studentSorter.algorithmName()))
-                .map(studentSorter -> studentSorter.sortByPerformance(students))
+                .map(studentSorter -> studentSorter.sortByPerformance(command.students()))
                 .findFirst()
                 .orElseThrow();
     }

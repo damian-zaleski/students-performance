@@ -1,4 +1,8 @@
 package pl.degath.sorter.command;
 
-public record SortStudentsByPerformanceCommand(String algorithmName) {
+import pl.degath.sorter.Student;
+
+import java.util.List;
+
+public record SortStudentsByPerformanceCommand(String algorithmName, List<Student> students) {
 }
