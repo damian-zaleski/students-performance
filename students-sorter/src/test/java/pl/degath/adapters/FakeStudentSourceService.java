@@ -1,7 +1,7 @@
 package pl.degath.adapters;
 
-import pl.degath.sorter.Student;
-import pl.degath.sorter.port.StudentSourceApi;
+import pl.degath.studentssorter.Student;
+import pl.degath.studentssorter.port.StudentSourceApi;
 
 import java.util.ArrayList;
 import java.util.List;
