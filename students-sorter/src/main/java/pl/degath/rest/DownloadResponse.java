@@ -1,6 +1,6 @@
 package pl.degath.rest;
 
-import pl.degath.sorter.Student;
+import pl.degath.studentssorter.Student;
 
 import java.util.List;
 import java.util.stream.Collectors;

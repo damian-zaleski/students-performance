@@ -1,8 +1,8 @@
 package pl.degath.adapters;
 
 import jakarta.inject.Singleton;
-import pl.degath.sorter.Student;
-import pl.degath.sorter.port.StudentSorter;
+import pl.degath.studentssorter.Student;
+import pl.degath.studentssorter.port.StudentSorter;
 
 import java.util.List;
 

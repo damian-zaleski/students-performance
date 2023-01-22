@@ -1,16 +1,17 @@
-package pl.degath.sorter;
+package pl.degath.studentssorter;
 
 
 import jakarta.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.degath.sorter.command.SortStudentsByPerformanceCommand;
-import pl.degath.sorter.port.StudentSorter;
+import pl.degath.infrastructure.CommandHandler;
+import pl.degath.studentssorter.command.SortStudentsByPerformanceCommand;
+import pl.degath.studentssorter.port.StudentSorter;
 
 import java.util.List;
 
 @Singleton
-public class SortStudentsByPerformanceCommandHandler {
+public class SortStudentsByPerformanceCommandHandler implements CommandHandler<SortStudentsByPerformanceCommand, SortStudentsByPerformanceResult> {
 
     private final Logger LOG = LoggerFactory.getLogger(SortStudentsByPerformanceCommandHandler.class);
     private final List<StudentSorter> studentSorters;
@@ -19,7 +20,8 @@ public class SortStudentsByPerformanceCommandHandler {
         this.studentSorters = studentSorters;
     }
 
-    public SortStudentsByPerformanceResult sortStudentsByPerformance(SortStudentsByPerformanceCommand command) {
+    @Override
+    public SortStudentsByPerformanceResult handle(SortStudentsByPerformanceCommand command) {
         LOG.info("Sorting students by performance by [algorithm: {}]", command.algorithmName());
         return studentSorters.stream()
                 .filter(studentSorter -> command.algorithmName().equals(studentSorter.algorithmName()))

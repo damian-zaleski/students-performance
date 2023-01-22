@@ -1,22 +1,22 @@
-package pl.degath.sorter;
+package pl.degath.studentssorter;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.degath.adapters.HeapStudentSorter;
-import pl.degath.sorter.port.StudentSorter;
+import pl.degath.adapters.BubbleStudentSorter;
+import pl.degath.studentssorter.port.StudentSorter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-class HeapStudentSorterTest {
+class BubbleStudentSorterTest {
 
     StudentSorter studentSorter;
 
     @BeforeEach
     void setUp() {
-        studentSorter = new HeapStudentSorter();
+        studentSorter = new BubbleStudentSorter();
     }
 
     @Test
@@ -69,7 +69,7 @@ class HeapStudentSorterTest {
 
     @Test
     public void shouldNotThrowExceptionIfStudentsAreEmpty() {
-        List<Student> students = List.of();
+        List<Student> students = new ArrayList<>(List.of());
 
         List<Student> sortedStudents = studentSorter.sortByPerformance(students);
 

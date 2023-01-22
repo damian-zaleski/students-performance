@@ -1,4 +1,4 @@
-package pl.degath;
+package pl.degath.rest;
 
 import io.micronaut.runtime.server.EmbeddedServer;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
@@ -35,7 +35,7 @@ public class StudentPerformanceControllerTest {
         RestAssured.given()
                 .multiPart("file", "test.txt", input)
                 .multiPart("algorithm", "bubble")
-                .post("/sortByPerformance")
+                .post("/")
                 .then()
                 .assertThat()
                 .statusCode(200);

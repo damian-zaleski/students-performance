@@ -1,4 +1,4 @@
-package pl.degath.sorter;
+package pl.degath.studentssorter;
 
 import java.util.List;
 

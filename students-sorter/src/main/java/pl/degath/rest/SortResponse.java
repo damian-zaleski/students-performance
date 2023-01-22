@@ -1,8 +1,8 @@
 package pl.degath.rest;
 
 import com.fasterxml.jackson.annotation.JsonClassDescription;
-import pl.degath.sorter.SortStudentsByPerformanceResult;
-import pl.degath.sorter.Student;
+import pl.degath.studentssorter.SortStudentsByPerformanceResult;
+import pl.degath.studentssorter.Student;
 
 import java.util.List;
 

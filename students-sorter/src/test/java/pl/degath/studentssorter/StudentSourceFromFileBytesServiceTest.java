@@ -1,9 +1,9 @@
-package pl.degath.sorter;
+package pl.degath.studentssorter;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.degath.adapters.StudentSourceFromFileBytesService;
-import pl.degath.sorter.port.StudentSourceApi;
+import pl.degath.studentssorter.port.StudentSourceApi;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;

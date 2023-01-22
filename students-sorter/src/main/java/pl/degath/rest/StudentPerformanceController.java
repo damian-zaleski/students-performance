@@ -13,10 +13,10 @@ import io.micronaut.http.multipart.CompletedFileUpload;
 import io.micronaut.views.View;
 import jakarta.inject.Singleton;
 import pl.degath.adapters.StudentSourceFromFileBytesService;
-import pl.degath.sorter.SortStudentsByPerformanceCommandHandler;
-import pl.degath.sorter.SortStudentsByPerformanceResult;
-import pl.degath.sorter.Student;
-import pl.degath.sorter.command.SortStudentsByPerformanceCommand;
+import pl.degath.studentssorter.SortStudentsByPerformanceCommandHandler;
+import pl.degath.studentssorter.SortStudentsByPerformanceResult;
+import pl.degath.studentssorter.Student;
+import pl.degath.studentssorter.command.SortStudentsByPerformanceCommand;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class StudentPerformanceController {
         List<Student> students = new StudentSourceFromFileBytesService(file.getInputStream()).findAll();
 
         SortStudentsByPerformanceCommand command = new SortStudentsByPerformanceCommand(algorithm, students);
-        SortStudentsByPerformanceResult result = commandHandler.sortStudentsByPerformance(command);
+        SortStudentsByPerformanceResult result = commandHandler.handle(command);
         sortedStudents = result.students();
 
         return HttpResponse.ok(SortResponse.from(result));
